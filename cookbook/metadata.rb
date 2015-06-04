@@ -1,0 +1,12 @@
+name             'dashery'
+maintainer       'John Manero'
+maintainer_email 'john.manero@gmail.com'
+license          'MIT'
+description      'Installs/Configures Dashery'
+long_description IO.read(::File.expand_path('../../README.md', __FILE__)) rescue ''
+version          IO.read(::File.expand_path('../../VERSION', __FILE__)) rescue '0.0.1'
+
+depends 'apt'
+depends 'datadog'
+depends 'github'
+depends 'libarchive'

@@ -1,0 +1,28 @@
+var DataDog = require('connect-datadog');
+var Express = require('express');
+var HTTP = require('http');
+var Path = require('path');
+var IO = require('socket.io');
+
+require('../lib/config');
+
+var app = Express();
+var server = HTTP.createServer(app);
+
+var io = IO(server);
+
+app.engine('ejs', require('ejs').renderFile);
+app.set('views', Path.resolve(__dirname, '../view'));
+
+var Static = require('serve-static');
+app.use('/asset', Static(Path.resolve(__dirname, '../asset')));
+
+if (Config.get('datadog:enable'))
+  app.use(DataDog(Config.get('datadog')));
+
+require('../lib/control/display').attach(app, io);
+require('../lib/control/manage').attach(app, io);
+
+return server.listen(Config.get('service:listen'), function() {
+  console.log('Listening on TCP port ' + Config.get('service:listen'));
+});

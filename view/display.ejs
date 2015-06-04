@@ -1,0 +1,23 @@
+<%- include include/head.ejs %>
+<body>
+  <div class="navbar navbar-fixed-top navbar-sm" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#"><i class="fa fa-md fa-desktop"></i>&nbsp;Dashery</a>
+      </div>
+      <div class="navbar-header pull-right">
+
+      </div>
+    </div>
+  </div>
+  <div id="board-frame-container"></div>
+<%- include include/scripts.ejs %>
+  <script src="/asset/app/display.js"></script>
+  <script>
+    $(document).ready(function() {
+      window.dashery = new Display('<%= id %>', '#board-frame-container').start();
+    });
+  </script>
+</body>
+
+</html>
